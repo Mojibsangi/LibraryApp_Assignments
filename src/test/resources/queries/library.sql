@@ -9,3 +9,14 @@ select * from users;
     select id from users;
     -- getAllColumnAsList --> List --> size  --> EXPECTED
     -- getAllColumnAsList --> Set  --> size  --> EXPECTED
+
+    -- US01-1
+
+select * from book_borrow;
+
+select count(book_id) from book_borrow where is_returned = 0;
+
+SELECT * FROM  users WHERE false;
+
+
+select name from book_categories;

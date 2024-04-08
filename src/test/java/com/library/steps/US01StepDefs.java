@@ -6,8 +6,13 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
-public class UserStepDefs {
+import java.util.List;
+
+public class US01StepDefs {
     String actualUserCount;
+    List<String > actualColumnsNames;
+
+
     @Given("Establish the database connection")
     public void establish_the_database_connection() {
 
@@ -47,4 +52,53 @@ public class UserStepDefs {
         System.out.println("-----------------------------------------");
 
     }
+
+
+
+    @When("Execute query to get all columns")
+    public void execute_query_to_get_all_columns() {
+
+        String query="SELECT * FROM  users where false";
+        DB_Util.runQuery(query);
+
+        //DB_Util.getAllColumnNamesAsList();
+
+
+
+        actualColumnsNames = DB_Util.getAllColumnNamesAsList();  // to do this without DB_Util go to P01_JDBCIntro class in jdbc-project
+
+        /*
+        in order to do all the above part without using DB_Util, I would need the below steps
+
+         // DriverManager class helps to generate connection with related database
+        Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+
+        // it helps to run queries
+        Statement stmnt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+
+        // will help us to store data that we are getting
+        ResultSet rs = stmnt.executeQuery("SELECT * FROM  users WHERE false");
+
+         */
+
+        System.out.println("actualColumnsNames DB = " + actualColumnsNames);
+
+    }
+    @Then("verify the below columns are listed in result")
+    public void verify_the_below_columns_are_listed_in_result(List<String> expectedColumnsNames) {
+
+
+        System.out.println("expectedColumnsNames Doc = " + expectedColumnsNames);
+
+
+        Assert.assertEquals(expectedColumnsNames,actualColumnsNames);
+
+    }
+
+
+
+
+
+
+
 }
