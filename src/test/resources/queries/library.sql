@@ -20,3 +20,11 @@ SELECT * FROM  users WHERE false;
 
 
 select name from book_categories;
+
+
+
+select * from books where name ='The Way of Kings';
+
+
+
+
