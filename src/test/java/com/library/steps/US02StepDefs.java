@@ -41,6 +41,8 @@ public class US02StepDefs {
     public void borrowed_books_number_information_must_match_with_db() {
 
 
+
+
         String query = "select count(book_id) from book_borrow where is_returned = 0";
 
         DB_Util.runQuery(query);

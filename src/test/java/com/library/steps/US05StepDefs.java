@@ -18,6 +18,11 @@ public class US05StepDefs {
                 "group by name order by 2 desc;  ";
 
 
+        String OscarQuery=" select bc.name, count(*) from book_borrow bb\n" +
+                "        inner join books b on bb.book_id = b.id\n" +
+                "        inner join book_categories bc on b.book_category_id = bc.id\n" +
+                "        group by bc.name order by count(*) desc limit 1";
+
         DB_Util.runQuery(query);
 
 
