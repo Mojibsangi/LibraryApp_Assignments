@@ -16,10 +16,13 @@ public class US04StepDefs {
 
 
     BookPage bookPage = new BookPage();
+    String bookName;
 
 
     @When("the user searches for {string} book")
     public void the_user_searches_for_book(String bookName) {
+
+        this.bookName=bookName;
 
         bookPage.search.sendKeys(bookName, Keys.ENTER );
 
@@ -51,7 +54,7 @@ public class US04StepDefs {
 
         System.out.println("Array of all Actual UI: "+Arrays.toString(allActual));
 
-        String query="select * from books where name ='The Way of Kings'";
+        String query="select * from books where name ='"+bookName+"'";
 
         DB_Util.runQuery(query);
 
